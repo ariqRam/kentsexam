@@ -41,7 +41,7 @@ function generateQuestions(textfull: string, transfull: string) {
 		const words: string[] = s.split(" ");
 		let randId: number = getRandomInt(words.length);
 
-		while ((words[randId].length <= 3) || ["this", "that"].includes(words[randId]) || !isNaN(words[randId])) {
+		while ((words[randId].length <= 3) || ["this", "that"].includes(words[randId]) || !isNaN(Number(words[randId]))) {
 			randId = getRandomInt(words.length);
 		}
 
