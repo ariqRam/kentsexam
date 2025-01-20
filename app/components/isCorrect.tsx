@@ -1,4 +1,4 @@
-export default function IsCorrect({ isCorrects }) {
+export default function IsCorrect({ isCorrects }: { isCorrects: boolean[] }) {
 	return (
 		<div className="grid grid-cols-12 gap-4" >
 			{
