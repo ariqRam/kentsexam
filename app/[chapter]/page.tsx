@@ -3,7 +3,7 @@
 import IsCorrect from "../components/isCorrect";
 
 import { useEffect, useState, useRef } from "react";
-import { useParams, redirect } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
 class Question {
 	qid: number;
