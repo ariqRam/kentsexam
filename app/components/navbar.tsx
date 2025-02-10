@@ -1,10 +1,9 @@
 "use client"
 
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-	const router = useRouter();
 	const pathname = usePathname();
 	const chapters = [16, 17, 18, 19, 20];
 
