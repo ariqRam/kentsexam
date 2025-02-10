@@ -3,7 +3,7 @@
 import IsCorrect from "../components/isCorrect";
 
 import { useEffect, useState, useRef } from "react";
-import { useParams } from 'next/navigation'
+import { useParams, redirect } from 'next/navigation'
 
 class Question {
 	qid: number;
@@ -54,8 +54,9 @@ function generateQuestions(textfull: string, transfull: string) {
 }
 
 export default function Home() {
-	const params = useParams<{ chapter: string }>();
+	const params = useParams<{ chapter: string }>(); // Make chapter optional
 	const chapter: string = params.chapter;
+
 	const [textfull, setTextfull] = useState("Loading...");
 	const [transfull, setTransfull] = useState("Loading...");
 
@@ -70,8 +71,13 @@ export default function Home() {
 			questionRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "start" });
 		}
 	};
+	console.log(params.chapter)
 
 	useEffect(() => {
+		if (!params.chapter) {
+			console.log("hello")
+			redirect("/16");
+		}
 		setShow(false);
 		setQuestions(generateQuestions(textfull, transfull));
 		if (!chapter) return;
@@ -79,7 +85,8 @@ export default function Home() {
 		async function fetchText() {
 			try {
 				console.log("fetching...")
-				const res = await fetch(`/${chapter}.txt`);
+				// const res = await fetch(`/${chapter}.txt`);
+				const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/${chapter}.txt`);
 				const text = await res.text();
 				setTextfull(text.split("\n")[0].trim());
 				setTransfull(text.split("\n")[1].trim())
@@ -90,7 +97,7 @@ export default function Home() {
 		}
 
 		fetchText();
-	}, [chapter]);
+	}, [chapter, params.chapter]);
 
 	function handleShowButton() {
 		if (show) window.location.reload();
