@@ -112,7 +112,7 @@ export default function Home() {
 		<div className="p-10">
 			{/* <input type="text" value={text} onChange={(e) => setText(e.target.value)} /> */}
 			{questions.map((q, index) => (
-				<div key={q.qid} className="p-5" ref={(el) => (questionRefs.current[index] = el ?? null)}>
+				<div key={q.qid} className="p-5" ref={el => { questionRefs.current[index] = el }}>
 					<p className="text-3xl">
 						{q.qid + 1}. {q.foreword}
 						<span>
