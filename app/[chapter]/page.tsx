@@ -71,13 +71,8 @@ export default function Home() {
 			questionRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "start" });
 		}
 	};
-	console.log(params.chapter)
 
 	useEffect(() => {
-		if (!params.chapter) {
-			console.log("hello")
-			redirect("/16");
-		}
 		setShow(false);
 		setQuestions(generateQuestions(textfull, transfull));
 		if (!chapter) return;
@@ -90,14 +85,13 @@ export default function Home() {
 				const text = await res.text();
 				setTextfull(text.split("\n")[0].trim());
 				setTransfull(text.split("\n")[1].trim())
-				console.log(text);
 			} catch (error) {
 				setTextfull(`Error: File not found. ${error}`);
 			}
 		}
 
 		fetchText();
-	}, [chapter, params.chapter]);
+	}, [chapter, textfull, transfull]);
 
 	function handleShowButton() {
 		if (show) window.location.reload();
